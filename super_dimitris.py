@@ -86,7 +86,6 @@ class SuperDimitris:
             if self.stats.game_active:
                 self._move_dim()
                 self.dim.update()
-                self.blocks.update()
                 self.beans.update()
                 self._check_bean_direction()
                 self._check_dim_burger_collisions()
@@ -117,9 +116,9 @@ class SuperDimitris:
             self.stats.game_active = True
 
             # Reset all stats
-            self.stats.reset_stats()
-            self.scoreboard.set_score()
-            self.scoreboard.set_secret_score()
+            self.stats._reset_stats()
+            self.scoreboard._set_score()
+            self.scoreboard._set_secret_score()
 
             # Initialize objects position
             self.blocks.empty()
@@ -258,12 +257,12 @@ class SuperDimitris:
             if pygame.Rect.colliderect(self.dim.rect, burger.rect):
                 self.burgers.remove(burger)
                 self.stats.score += 1
-                self.scoreboard.set_score()
+                self.scoreboard._set_score()
                 self.scoreboard.check_high_score()
         if pygame.sprite.spritecollideany(self.dim, self.secret_burgers):
             self.secret_burgers.empty()
             self.stats.secret_score += 1
-            self.scoreboard.set_secret_score()
+            self.scoreboard._set_secret_score()
 
     def _check_dim_bean_collisions(self):
         """Check if dim collides with a bean and if so, simulate GAME OVER"""
@@ -300,7 +299,8 @@ class SuperDimitris:
         self.settings.dim_speed)
         con_5 = self.dim.moving_left
 
-        if (con_1 and con_2) or (con_2 and con_3 and con_4 and not con_5):
+        if ((con_1 and con_2 and not con_5) or 
+        (con_2 and con_3 and con_4 and not con_5)):
             self.dim.rect.x -= self.settings.dim_speed
 
     def _limit_moving_left(self, block):
@@ -314,7 +314,8 @@ class SuperDimitris:
         self.settings.dim_speed)
         con_5 = self.dim.moving_right
 
-        if (con_1 and con_2) or (con_2 and con_3 and con_4 and not con_5):
+        if ((con_1 and con_2 and not con_5) or 
+        (con_2 and con_3 and con_4 and not con_5)):
             self.dim.rect.x += self.settings.dim_speed
     
     def _limit_moving_up(self, block):

@@ -6,7 +6,6 @@ class BigBurger:
     def __init__(self, program):
         """Initialize burger and get its rect"""
         self.screen = program.screen
-        self.screen_rect = self.screen.get_rect()
         self.settings = program.settings
 
         # Load dim's image and get its rect

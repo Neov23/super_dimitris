@@ -8,6 +8,11 @@ class Settings:
         self.screen_height = 900
         self.bg_color = (240, 100, 10)
 
+        # Ground settings
+        self.ground_width = self.screen_width
+        self.ground_height = self.screen_height // 5
+        self.ground_color = (120, 230, 30)
+
         # Dim's settings
         self.dim_speed = 7
         self.dim_jump = 12
@@ -20,9 +25,3 @@ class Settings:
 
         # Bean settings
         self.bean_speed = 2
-        self.bean_direction = 1
-
-        # Ground settings
-        self.ground_width = self.screen_width
-        self.ground_height = self.screen_height // 5
-        self.ground_color = (120, 230, 30)

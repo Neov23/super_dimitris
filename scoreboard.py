@@ -12,15 +12,15 @@ class Scoreboard:
         self.stats = program.stats
 
         # Font settings for scoring information
-        self.text_color = (30, 30, 30)
+        self.text_color = (0, 0, 0)
         self.font = pygame.font.SysFont(None, 38)
 
         # Prepare the initial score images.
-        self.set_score()
-        self.set_secret_score()
-        self.set_high_score()
+        self._set_score()
+        self._set_secret_score()
+        self._set_high_score()
 
-    def set_score(self):
+    def _set_score(self):
         """Turn the score into a rendered image"""
         score_str = str(f"{self.stats.score}/50")
         self.score_image = self.font.render(score_str, True,
@@ -34,7 +34,7 @@ class Scoreboard:
             self.settings.block_width // 2 -
             self.score_rect.height // 2)
 
-    def set_secret_score(self):
+    def _set_secret_score(self):
         """Turn the score of secret burgers into a rendered image"""
         secret_score_str = str(f"Secret:  {self.stats.secret_score}/1")
         self.secret_score_image = self.font.render(secret_score_str, True,
@@ -47,7 +47,7 @@ class Scoreboard:
             self.settings.block_width // 2 -
             self.score_rect.height // 2)
         
-    def set_high_score(self):
+    def _set_high_score(self):
         """Turn the high score into a rendered image."""
         high_score_str = str(f"High Score: {self.stats.high_score}/50")
         self.high_score_image = self.font.render(high_score_str, True,
@@ -64,7 +64,7 @@ class Scoreboard:
         """Check to see if there's a new high score."""
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
-            self.set_high_score()
+            self._set_high_score()
     
     def show_score(self):
         """Draw scores, level and ships to the screen."""

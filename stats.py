@@ -4,16 +4,16 @@ class Stats:
     def __init__(self, program):
         """Initalize statistics"""
         self.settings = program.settings
-        self.reset_stats()
+        self._reset_stats()
 
         # Start Alien Invasion in an inactive state.
         self.game_active = False
 
         # High score should never be reset.
         self.high_score = 0
-        self.load_stats()
+        self._load_stats()
 
-    def reset_stats(self):
+    def _reset_stats(self):
         """Initialize statistics that can change during the game"""
         self.score = 0
         self.secret_score = 0
@@ -24,7 +24,7 @@ class Stats:
         with open(filename, 'w') as f:
             f.write(str(self.high_score))
     
-    def load_stats(self):
+    def _load_stats(self):
         try:
             filename = 'high_score.json'
 
